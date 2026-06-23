@@ -1,0 +1,331 @@
+import type { Category, OptionGroup, Product } from "./types";
+
+export const categories: Category[] = [
+  { id: "all", name: "ทั้งหมด", nameEn: "All", emoji: "✦" },
+  { id: "coffee", name: "กาแฟ", nameEn: "Coffee", emoji: "☕" },
+  { id: "tea", name: "ชา", nameEn: "Tea", emoji: "🍵" },
+  { id: "milk", name: "นม & ช็อก", nameEn: "Milk", emoji: "🥛" },
+  { id: "frappe", name: "ปั่น & โซดา", nameEn: "Blended", emoji: "🧋" },
+  { id: "bakery", name: "เบเกอรี่", nameEn: "Bakery", emoji: "🥐" },
+];
+
+/* ---- reusable option groups ---- */
+
+const tempServe: OptionGroup = {
+  id: "temp",
+  label: "อุณหภูมิ",
+  type: "single",
+  choices: [
+    { id: "hot", label: "ร้อน", delta: 0 },
+    { id: "iced", label: "เย็น", delta: 10 },
+    { id: "blended", label: "ปั่น", delta: 20 },
+  ],
+};
+
+const tempColdOnly: OptionGroup = {
+  id: "temp",
+  label: "อุณหภูมิ",
+  type: "single",
+  choices: [
+    { id: "iced", label: "เย็น", delta: 0 },
+    { id: "blended", label: "ปั่น", delta: 15 },
+  ],
+};
+
+const size: OptionGroup = {
+  id: "size",
+  label: "ขนาด",
+  type: "single",
+  choices: [
+    { id: "s", label: "เล็ก", delta: 0 },
+    { id: "m", label: "กลาง", delta: 10 },
+    { id: "l", label: "ใหญ่", delta: 20 },
+  ],
+};
+
+const sweetness: OptionGroup = {
+  id: "sweet",
+  label: "ระดับความหวาน",
+  type: "single",
+  choices: [
+    { id: "0", label: "ไม่หวาน", delta: 0 },
+    { id: "25", label: "หวานน้อย", delta: 0 },
+    { id: "50", label: "หวานปกติ", delta: 0 },
+    { id: "100", label: "หวานมาก", delta: 0 },
+  ],
+};
+
+const extras: OptionGroup = {
+  id: "extras",
+  label: "เพิ่มท็อปปิ้ง",
+  type: "multi",
+  choices: [
+    { id: "shot", label: "เอสเพรสโซช็อตเพิ่ม", delta: 15 },
+    { id: "whip", label: "วิปครีม", delta: 15 },
+    { id: "pearl", label: "ไข่มุก", delta: 10 },
+    { id: "oat", label: "เปลี่ยนเป็นนมโอ๊ต", delta: 20 },
+  ],
+};
+
+/* ---- products ---- */
+
+export const products: Product[] = [
+  // Coffee
+  {
+    id: "espresso",
+    name: "เอสเพรสโซ่",
+    nameEn: "Espresso",
+    desc: "ช็อตเข้มกลมกล่อม คั่วกลางสไตล์บ้านเรา",
+    basePrice: 55,
+    category: "coffee",
+    emoji: "☕",
+    gradient: "",
+    badge: "แนะนำ",
+    options: [size, sweetness, extras],
+  },
+  {
+    id: "latte",
+    name: "ลาเต้",
+    nameEn: "Cafe Latte",
+    desc: "เอสเพรสโซ่กับนมสตีมนุ่ม ละมุนทุกจิบ",
+    basePrice: 65,
+    category: "coffee",
+    emoji: "🥛",
+    gradient: "",
+    badge: "ฮิต",
+    options: [tempServe, size, sweetness, extras],
+  },
+  {
+    id: "cappuccino",
+    name: "คาปูชิโน่",
+    nameEn: "Cappuccino",
+    desc: "ฟองนมหนานุ่ม โรยผงโกโก้หอมกรุ่น",
+    basePrice: 65,
+    category: "coffee",
+    emoji: "☕",
+    gradient: "",
+    options: [tempServe, size, sweetness, extras],
+  },
+  {
+    id: "mocha",
+    name: "มอคค่า",
+    nameEn: "Mocha",
+    desc: "กาแฟพบช็อกโกแลตเข้ม ราดวิปครีม",
+    basePrice: 75,
+    category: "coffee",
+    emoji: "🍫",
+    gradient: "",
+    options: [tempServe, size, sweetness, extras],
+  },
+  {
+    id: "americano",
+    name: "อเมริกาโน่",
+    nameEn: "Americano",
+    desc: "เอสเพรสโซ่กับน้ำ สดชื่นไม่อ้อมค้อม",
+    basePrice: 55,
+    category: "coffee",
+    emoji: "🪐",
+    gradient: "",
+    options: [tempServe, size, sweetness, extras],
+  },
+  {
+    id: "caramel-macchiato",
+    name: "คาราเมลมัคคิอาโต้",
+    nameEn: "Caramel Macchiato",
+    desc: "วานิลลา นมสตีม ราดคาราเมลหวานละมุน",
+    basePrice: 85,
+    category: "coffee",
+    emoji: "🍯",
+    gradient: "",
+    badge: "ฮิต",
+    options: [tempServe, size, sweetness, extras],
+  },
+
+  // Tea
+  {
+    id: "thai-tea",
+    name: "ชาไทย",
+    nameEn: "Thai Tea",
+    desc: "ชาไทยรสเข้มข้น หอมมันกลมกล่อม",
+    basePrice: 55,
+    category: "tea",
+    emoji: "🧡",
+    gradient: "",
+    badge: "ฮิต",
+    options: [tempColdOnly, size, sweetness, extras],
+  },
+  {
+    id: "matcha-latte",
+    name: "มัทฉะลาเต้",
+    nameEn: "Matcha Latte",
+    desc: "มัทฉะเกรดพรีเมียมจากญี่ปุ่น กับนมสด",
+    basePrice: 75,
+    category: "tea",
+    emoji: "🍵",
+    gradient: "",
+    badge: "แนะนำ",
+    options: [tempServe, size, sweetness, extras],
+  },
+  {
+    id: "green-tea",
+    name: "ชาเขียว",
+    nameEn: "Green Tea",
+    desc: "ชาเขียวหอมอ่อน ดื่มแล้วสดชื่น",
+    basePrice: 50,
+    category: "tea",
+    emoji: "🌿",
+    gradient: "",
+    options: [tempServe, size, sweetness, extras],
+  },
+  {
+    id: "lemon-tea",
+    name: "ชามะนาว",
+    nameEn: "Lemon Tea",
+    desc: "ชาดำกับมะนาวสด เปรี้ยวหวานสดใส",
+    basePrice: 50,
+    category: "tea",
+    emoji: "🍋",
+    gradient: "",
+    options: [tempColdOnly, size, sweetness, extras],
+  },
+
+  // Milk & Choc
+  {
+    id: "cocoa",
+    name: "โกโก้",
+    nameEn: "Cocoa",
+    desc: "โกโก้เข้มข้น หอมหวานละลายในปาก",
+    basePrice: 60,
+    category: "milk",
+    emoji: "🍫",
+    gradient: "",
+    options: [tempServe, size, sweetness, extras],
+  },
+  {
+    id: "fresh-milk",
+    name: "นมสดชมพู",
+    nameEn: "Pink Milk",
+    desc: "นมสดกับน้ำหวานสีชมพู หอมหวานน่ารัก",
+    basePrice: 50,
+    category: "milk",
+    emoji: "🌸",
+    gradient: "",
+    badge: "ใหม่",
+    options: [tempColdOnly, size, sweetness, extras],
+  },
+  {
+    id: "caramel-milk",
+    name: "นมคาราเมล",
+    nameEn: "Caramel Milk",
+    desc: "นมสดราดคาราเมล หวานมันกำลังดี",
+    basePrice: 60,
+    category: "milk",
+    emoji: "🍮",
+    gradient: "",
+    options: [tempColdOnly, size, sweetness, extras],
+  },
+
+  // Frappe & Soda
+  {
+    id: "brown-sugar-boba",
+    name: "บราวน์ชูการ์ไข่มุก",
+    nameEn: "Brown Sugar Boba",
+    desc: "นมสดบราวน์ชูการ์ ไข่มุกเคี้ยวหนึบ",
+    basePrice: 75,
+    category: "frappe",
+    emoji: "🧋",
+    gradient: "",
+    badge: "ฮิต",
+    options: [size, sweetness, extras],
+  },
+  {
+    id: "coffee-frappe",
+    name: "กาแฟปั่น",
+    nameEn: "Coffee Frappe",
+    desc: "กาแฟปั่นเย็นเนียน ราดวิปครีมหนานุ่ม",
+    basePrice: 80,
+    category: "frappe",
+    emoji: "🥤",
+    gradient: "",
+    options: [size, sweetness, extras],
+  },
+  {
+    id: "strawberry-soda",
+    name: "โซดาสตรอเบอร์รี่",
+    nameEn: "Strawberry Soda",
+    desc: "โซดาซ่ากับสตรอเบอร์รี่ สดชื่นจี๊ดจ๊าด",
+    basePrice: 65,
+    category: "frappe",
+    emoji: "🍓",
+    gradient: "",
+    badge: "ใหม่",
+    options: [size, sweetness],
+  },
+  {
+    id: "yuzu-soda",
+    name: "โซดายูซุ",
+    nameEn: "Yuzu Soda",
+    desc: "ส้มยูซุญี่ปุ่นกับโซดา หอมเปรี้ยวสดชื่น",
+    basePrice: 70,
+    category: "frappe",
+    emoji: "🍊",
+    gradient: "",
+    options: [size, sweetness],
+  },
+
+  // Bakery
+  {
+    id: "butter-croissant",
+    name: "ครัวซองต์เนย",
+    nameEn: "Butter Croissant",
+    desc: "อบใหม่ทุกเช้า กรอบนอกนุ่มในหอมเนย",
+    basePrice: 55,
+    category: "bakery",
+    emoji: "🥐",
+    gradient: "",
+    badge: "แนะนำ",
+    options: [],
+  },
+  {
+    id: "choc-brownie",
+    name: "บราวนี่ช็อกโกแลต",
+    nameEn: "Chocolate Brownie",
+    desc: "บราวนี่เนื้อหนึบ เข้มข้นช็อกโกแลตเบลเยียม",
+    basePrice: 65,
+    category: "bakery",
+    emoji: "🍫",
+    gradient: "",
+    options: [],
+  },
+  {
+    id: "cheese-cake",
+    name: "ชีสเค้ก",
+    nameEn: "Cheesecake",
+    desc: "ชีสเค้กเนื้อนุ่มละมุน รสชีสกลมกล่อม",
+    basePrice: 75,
+    category: "bakery",
+    emoji: "🍰",
+    gradient: "",
+    options: [],
+  },
+  {
+    id: "cookie",
+    name: "คุกกี้ช็อกชิป",
+    nameEn: "Choc Chip Cookie",
+    desc: "คุกกี้อบใหม่ ช็อกชิปเต็มคำ",
+    basePrice: 40,
+    category: "bakery",
+    emoji: "🍪",
+    gradient: "",
+    options: [],
+  },
+];
+
+/** Tile gradient classes keyed by category — keeps product tiles cohesive. */
+export const categoryTile: Record<string, string> = {
+  coffee: "from-[#6f4322] via-[#9a5f33] to-[#c98a4f]",
+  tea: "from-[#5d7a3f] via-[#7f9b54] to-[#aac17e]",
+  milk: "from-[#b76e79] via-[#caa15f] to-[#e6c79b]",
+  frappe: "from-[#a85a3c] via-[#c97b5a] to-[#e0a06f]",
+  bakery: "from-[#8a5a2b] via-[#b3814a] to-[#d8b27a]",
+};
